@@ -1,39 +1,5 @@
-# PB接口协议
 
-- [PB接口协议](#pb%E6%8E%A5%E5%8F%A3%E5%8D%8F%E8%AE%AE)
-    - [接口说明](#%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E)
-    - [接口注意事项](#%E6%8E%A5%E5%8F%A3%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
-    - [请求信息Request](#%E8%AF%B7%E6%B1%82%E4%BF%A1%E6%81%AFrequest)
-        - [接口信息（BidRequest）](#%E6%8E%A5%E5%8F%A3%E4%BF%A1%E6%81%AFbidrequest)
-        - [App信息（BidRequest.App）](#app%E4%BF%A1%E6%81%AFbidrequestapp)
-        - [设备信息（BidRequest.Device）](#%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AFbidrequestdevice)
-            - [Geo对象（BidRequest.Device.Geo）](#geo%E5%AF%B9%E8%B1%A1bidrequestdevicegeo)
-        - [曝光信息（BidRequest.Imp）](#%E6%9B%9D%E5%85%89%E4%BF%A1%E6%81%AFbidrequestimp)
-            - [横幅信息（BidRequest.Impression.Banner）](#%E6%A8%AA%E5%B9%85%E4%BF%A1%E6%81%AFbidrequestimpressionbanner)
-            - [视频（BidRequest.Impression.Video）](#%E8%A7%86%E9%A2%91bidrequestimpressionvideo)
-            - [原生广告（BidRequest.Impression.NativeRequest）](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Abidrequestimpressionnativerequest)
-                - [原生广告Asset（NativeRequest.Asset）](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Aassetnativerequestasset)
-                    - [原生广告Image（NativeRequest.Asset.Image）](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Aimagenativerequestassetimage)
-                    - [原生广告Title（NativeRequest.Asset.Title）](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Atitlenativerequestassettitle)
-                - [原生广告Data（NativeRequest.Asset.Data）](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Adatanativerequestassetdata)
-            - [Pmp对象（BidRequest.Impression.Pmp）](#pmp%E5%AF%B9%E8%B1%A1bidrequestimpressionpmp)
-                - [Deal对象（BidRequest.Impression.Pmp.Deal）](#deal%E5%AF%B9%E8%B1%A1bidrequestimpressionpmpdeal)
-        - [用户信息（BidRequest.User）](#%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AFbidrequestuser)
-            - [用户扩展信息（BidRequest.User.Data）](#%E7%94%A8%E6%88%B7%E6%89%A9%E5%B1%95%E4%BF%A1%E6%81%AFbidrequestuserdata)
-                - [用户人群属性信息（BidRequest.User.Data.Segment）](#%E7%94%A8%E6%88%B7%E4%BA%BA%E7%BE%A4%E5%B1%9E%E6%80%A7%E4%BF%A1%E6%81%AFbidrequestuserdatasegment)
-        - [Site信息（BidRequest.Site）](#site%E4%BF%A1%E6%81%AFbidrequestsite)
-            - [出品方信息（BidRequest.Site.Publisher）](#%E5%87%BA%E5%93%81%E6%96%B9%E4%BF%A1%E6%81%AFbidrequestsitepublisher)
-    - [返回信息Response](#%E8%BF%94%E5%9B%9E%E4%BF%A1%E6%81%AFresponse)
-        - [接口信息（BidResponse）](#%E6%8E%A5%E5%8F%A3%E4%BF%A1%E6%81%AFbidresponse)
-            - [SeatBid信息（BidResponse.SeatBid）](#seatbid%E4%BF%A1%E6%81%AFbidresponseseatbid)
-                - [Bid信息（BidResponse.SeatBid.Bid）](#bid%E4%BF%A1%E6%81%AFbidresponseseatbidbid)
-                - [原生广告Native（NativeResponse）](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Anativenativeresponse)
-                    - [原生广告Asset（NativeResponse.Asset）](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Aassetnativeresponseasset)
-                    - [原生广告Title（NativeResponse.Asset.Title）](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Atitlenativeresponseassettitle)
-                    - [原生广告Image（NativeResponse.Asset.Image）](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Aimagenativeresponseassetimage)
-                    - [原生广告Data（NativeResponse.Asset.Data)](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Adatanativeresponseassetdata)
-                    - [原生广告Link（NativeResponse.Asset.Link)](#%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8Alinknativeresponseassetlink)
-    - [向DSP发送的竞价结果接口(Win Notice)](#%E5%90%91dsp%E5%8F%91%E9%80%81%E7%9A%84%E7%AB%9E%E4%BB%B7%E7%BB%93%E6%9E%9C%E6%8E%A5%E5%8F%A3win-notice)
+# PB接口协议
 
 ## 接口说明
 
@@ -119,7 +85,6 @@ Adx RTB 总共包含三个步骤。
 | country            | string |        | 否   | 国家代码，请参见[ISO-3166-1 Alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)                  |
 | region             | string |        | 否   | 国内是省名，美国是州的2个字母缩写，其他国家请参见[ISO-3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) |
 | city               | string |        | 否   | 城市名称，例："北京"                                                                                    |
-| LocationType       | 枚举   |        | 否   | 位置来源，1：根据gps位置，2：根据IP，3：用户提供，其他详见proto文件                                     |
 
 ### 曝光信息（BidRequest.Imp）
 
@@ -134,7 +99,7 @@ Adx RTB 总共包含三个步骤。
 | pmp                          | 对象   |        | 否   | pmp对象， 只有在pmp交易模式时才存在                                                                                                                   |
 | native                       | 对象   |        | 否   | native对象， 下面包含NativeRequest                                                                                                                    |
 | tagid                        | string |        | 否   | 广告位id                                                                                                                                             |
-| secure                       | integer |       | 否   |是否强制使用https, 0-不启用，1-启用|
+| secure                       | integer |       | 否   |是否使用https, 0-不启用，1-启用|
 
 #### 横幅信息（BidRequest.Impression.Banner）
 
@@ -148,12 +113,12 @@ Adx RTB 总共包含三个步骤。
 
 | 字段名称    | 类型  | 默认值 | 必须 | 描述                                                                         |
 | ----------- | ----- | ------ | ---- | ---------------------------------------------------------------------------- |
-| mimes       | array |        | 是   | 支持的视频类型                                                               |
-| protocols   | array |        | 是   | 支持的视频响应协议                                                           |
-| minduration | int32 |        | 否   | 最短时间，单位：秒                                                           |
-| maxduration | int32 |        | 否   | 最长时间，单位：秒                                                           |
-| w           | int32 |        | 是   | 广告位宽度                                                                   |
-| h           | int32 |        | 是   | 广告位高度                                                                   |
+| mimes       | array |        | 否   | 支持的视频类型                                                               |
+| protocols   | array |        | 否   | 支持的视频响应协议                                                           |
+| minduration | int32 |        | 是   | 最短时间，单位：秒                                                           |
+| maxduration | int32 |        | 是   | 最长时间，单位：秒                                                           |
+| w           | int32 |        | 否   | 广告位宽度                                                                   |
+| h           | int32 |        | 否   | 广告位高度                                                                   |
 | pos         | 枚举  | 0      | 否   | 广告位位置，0：未知，4：头部，5：底部，6：侧边栏，7：全屏，其他详见proto文件 |
 
 #### 原生广告（BidRequest.Impression.NativeRequest）
@@ -283,7 +248,7 @@ Adx RTB 总共包含三个步骤。
 | impid                          | string   |        | 是   | 曝光id                                                                                                                                                                                                    |
 | price                          | double   |        | 是   | 出价，单位为分，不能低于曝光最低价格，否则会被当做无效应答。目前只支持人民币                                                                                                                              |
 | adid                           | string   |        | 是   | 物料ID，由DSP提供。DSP必须保证如果adid相同，则物料的所有字段相同（除了nurl、clkurl、imptrackers、clktrackers）。如果DSP提供的adid满足以下条件会受到惩罚：1、提交过多不同的adid；2、相同adid的其他字段不同 |
-| nurl                           | string   |        | 否   | 竞价获胜通知url，win notice url， GET方法调用。可以使用[宏](supported_macros.md)。推荐使用"extensions[imptrackers][]"来获取获胜通知。                                                                     |
+| nurl                           | string   |        | 否   | 竞价获胜通知url，win notice url， GET方法调用。可以使用[宏](supported_macros.md)。不推荐使用独立的win notice url, 建议使用"extensions[imp_trackers][]"来获取获胜通知。                                                                     |
 | bundle                         | string   |        | 否   | 为应用包名，例：“com.zplay.demo”                                                                                                                                                                        |
 | iurl                           | string   |        | 否   | 广告素材的图片URL。banner广告必填                                                                                                                                                                         |
 | w                              | int32    |        | 否   | 素材宽度， 当给出的广告素材尺寸与广告 位尺寸不完全一致时，素材宽高信息必须给出。                                                                                                                          |
@@ -292,18 +257,12 @@ Adx RTB 总共包含三个步骤。
 | adm                            | string   |        | 否   | 广告物料，目前只在视频广告时使用。 视频素材必须符合VAST 3.0规范，请参看[VAST 3.0 标准](http://www.iab.com/wp-content/uploads/2015/06/VASTv3_0.pdf)                                                        |
 | native                         | 对象     |        | 否   | 原生广告对象                                                                                                                                                                                              |
 | dealid                         | string   |        | 否   | deal id，只有在pmp交易时才需要                                                                                                                                                                            |
-| extensions[app_ver]            | string   |        | 否   | app推广广告的话，需要提供app的版本号                                                                                                                                                                      |
-| extensions[clkurl]             | string   |        | 否   | 广告点击跳转地址，允许使用[宏](supported_macros.md)，例http://www.zplay.cn/ad/{AUCTION_BID_ID}                                                                                                            |
-| extensions[imptrackers][]      | string[] |        | 否   | 曝光追踪地址，允许有多个追踪地址，允许使用[宏](supported_macros.md)                                                                                                                                       |
-| extensions[clktrackers][]      | string[] |        | 否   | 点击追踪地址，允许有多个追踪地址，允许使用[宏](supported_macros.md)                                                                                                                                       |
+| extensions[clk_url]             | string   |        | 否   | 广告点击跳转地址，允许使用[宏](supported_macros.md)，例http://www.google.cn/ad/{AUCTION_BID_ID}                                                                                                            |
+| extensions[imp_trackers][]      | string[] |        | 否   | 曝光追踪地址，允许有多个追踪地址，允许使用[宏](supported_macros.md)                                                                                                                                       |
+| extensions[clk_trackers][]      | string[] |        | 否   | 点击追踪地址，允许有多个追踪地址，允许使用[宏](supported_macros.md)                                                                                                                                       |
 | extensions[html_snippet]       | string   |        | 否   | html广告代码                                                                                                                                                                                              |
-| extensions[inventory_type]     | int      | 1      | 否   | 广告资源类型， 1：图片，2：图文，3：视频，4：html5，5：文本， 6：原生， 7：html5 url， 即一个指向html5素材页面的url                                                                                       |
 | extensions[title]              | string   |        | 否   | 图文广告中的标题                                                                                                                                                                                          |
 | extensions[desc]               | string   |        | 否   | 图文广告中的描述                                                                                                                                                                                          |
-| extensions[action]             | int      | 1      | 否   | 广告动作类型， 1： 在app内webview打开目标链接， 2： 在系统浏览器打开目标链接， 3：打开地图，4： 拨打电话，5：播放视频，6：App下载                                                                         |
-| extensions[download_file_name] | string   |        | 否   | 下载文件名，动作类型为下载类型时需要                                                                                                                                                                      |
-| extensions[fallback_url]       | string   |        | 否   | 应用唤醒失败后的打开地址，允许使用[宏](supported_macros.md)，例http://www.zplay.cn/ad/{AUCTION_BID_ID}                                                                                                             |
-| extensions[fallback_action]    | int      | 1      | 否   | fallback_url的动作类型，1：在app内webview打开目标链接，2：在系统浏览器打开目标链接，3：打开地图，4：拨打电话，5：播放视频，6：App下载，7：应用唤醒                                                        |
 
 ##### 原生广告Native（NativeResponse）
 
