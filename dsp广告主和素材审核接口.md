@@ -59,7 +59,7 @@ API 使用 JSON消息格式，通过 RESTFUL 的HTTP协议进行数据交换。
 
 HTTP 返回码为200则请求成功，否则可能客户端或服务端产生了异常，可根据 HTTP 状态码判断错误的类型。  
 
-HTTP响应中包含了头部信息：Content-Type: application/json。  
+HTTP响应中包含了头部信息：`Content-Type: application/json`。  
 响应信息包含在返回的JSON 数据中，包含本次操作的返回码和具体错误信息。响应信息分三部分内容，分别为状态码、说明和数据区。  
 
 对非数组形式的API请求，返回数据如下所示：  
@@ -186,6 +186,30 @@ URL: http://api.xcar.com/adx/v1/creative/audit_status
 |类型  |是否数组类型 |说明 |
 |-------|:----:|------- |
 |string |是|dsp广告主id  |
+
+# API请求/响应样例
+## 广告主请求响应
+### 广告主创建
+
+```
+{
+  "advertiserId":"105",
+  "name":"乐元素12",
+  "businessLicense":"http://image.google.com/x.jpg",
+  "qualification": "http://qulification.url",
+  "industryType": 5
+}
+```
+
+
+```
+{
+    "code":1,
+    "msg":"广告主名称不能为空"
+}
+```
+
+
 
 
 
