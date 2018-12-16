@@ -81,7 +81,7 @@ URL: http://api.xcar.com/adx/v1/advertiser
 |-------|:-----------:|---------|
 |Advertiser |否| 广告主信息|
 
-请求类型Advertiser：
+请求类型Advertiser:  
 
 |字段名称|类型|是否必填|      说明|
 |-------|-------|:------:|------|
@@ -98,6 +98,97 @@ URL: http://api.xcar.com/adx/v1/advertiser
 |code|int|是|响应码，0为操作成功，非0操作异常|
 |message|string|否|响应说明，如果code非0返回错误原因|
 |data|object|否|批量操作响应信息|
+
+### 广告主更新
+
+URL: http://api.xcar.com/adx/v1/advertiser/update  
+
+请求字段：  
+
+|类型  |是否数组类型 |说明 |
+|-------|:----:|--------|
+|Advertiser |否|广告主信息|
+
+请求类型Advertiser:  
+
+|字段名称|类型|是否必填|      说明|
+|-------|-------|:------:|-------------|
+|advertiserId|string|是|dsp平台广告主唯一id|
+|name|string|否|广告主名称|
+|businessLicense|string|否|广告主营业执照|
+|qualification|string|否|其他资质文件，多个资质文件需打包成压缩文件|
+|industryType |int   |否|广告主行业类型|
+
+### 广告主审核状态获取
+
+URL: http://api.xcar.com/adx/v1/advertiser/audit_status  
+
+请求字段：  
+
+|类型  |是否数组类型 |说明 |
+|-------|:----:|------- |
+|string |是|dsp广告主id  |
+
+## 广告
+
+### 广告创建
+
+URL: http://api.xcar.com/adx/v1/creative  
+
+请求字段：
+
+|类型|是否数组类型|说明|
+|---|:------:|------|
+|Creative|否|广告信息|
+
+请求类型Creative: 
+
+|字段名称|类型|   是否必填   | 说明    |
+|-------|-------|:------:|----------------------|
+|creativeId|string|是|素材id, dsp平台唯一|
+|advertiserId|string|是|dsp平台广告主id, dsp平台唯一|
+|name|string|是|广告名称|
+|creativeType|int|是|广告类型|
+|creativeUrl|string|否|素材url,非原生广告必填|
+|clickUrl|string|是|                  广告点击url  |
+|landingPage|string|是|               广告落地页地址|
+|nativeAd|object|否|原生广告对象，广告类型为原生广告必填|
+
+### 广告更新
+
+URL: http://api.xcar.com/adx/v1/creative/update  
+
+请求字段：
+
+|类型|是否数组类型|说明|
+|---|:------:|------|
+|Creative|否|广告信息|
+
+请求类型Creative:  
+
+|字段名称|类型|   是否必填   | 说明    |
+|-------|-------|:------:|----------------------|
+|creativeId|string|是|素材id, dsp平台唯一|
+|advertiserId|string|是|dsp平台广告主id, dsp平台唯一|
+|name|string|否|广告名称|
+|creativeType|int|否|广告类型|
+|creativeUrl|string|否|素材url,非原生广告必填|
+|clickUrl|string|否|                  广告点击url  |
+|landingPage|string|否|               广告落地页地址|
+|nativeAd|object|否|原生广告对象，广告类型为原生广告必填|
+
+### 广告审核状态获取
+
+URL: http://api.xcar.com/adx/v1/creative/audit_status
+
+请求字段：  
+
+|类型  |是否数组类型 |说明 |
+|-------|:----:|------- |
+|string |是|dsp广告主id  |
+
+
+
 
 
 
