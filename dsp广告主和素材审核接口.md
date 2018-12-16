@@ -1,1 +1,58 @@
-# 接口说明
+# 总体说明
+本文档作为 DSP 与爱卡程序化交易平台进行对接的指引文档。主要包括2个部分：
+
+1. **接入步骤** 
+   
+   阅读对象为 DSP 的商务人员。该部分说明了 DSP 与 Ad Exchange 对接的流程和步骤。
+2. **Buyer API** 
+
+   阅读对象为 DSP 的产品和开发人员。该部分详细描述了DSP向ADX上传/修改广告主/广告信息以及查询广告主/广告审核状态的接口。
+   
+   
+# 接入步骤
+# Buyer API
+本章节将详细介绍 DSP 如何使用 Buyer API 与 Ad Exchange 进行交互，提交/修改广告主/广告信息，查询广告主/广告审核状态。为确保广告内容的有效性与合法性，所有参与Ad Exchange竞价的 DSP平台必须将广告主和广告信息提前上传到 Ad Exchange 进行审核，审核通过后方可正常投放，如果DSP返回未经审核通过的广告，将直接被过滤不会被展现。
+
+## 权限认证
+API 通过用户授权令牌(token)来做权限验证，授权信息需要包含在 API 请求数据头中。
+
+## 编码方式
+参数编码使用 UTF-8编码
+
+## URL定义
+API URL格式定义如下：  
+http://api.xcar.com/adx/${api_version}/${resource_name}/${resource_action}
+
+其中api_version是版本(目前是v1)，resource_name表示要操作的资源，resource_action表示对资源的操作方法。
+
+resource_name目前包括两种资源：  
+
+|操作资源|说明|  
+|-----|-----|
+|advertiser|广告主|
+|creative|广告|
+
+resource_action目前包含的基本的操作方法有：  
+
+|操作|说明|
+|------|----------------|
+|add   | 新增            |
+|update| 修改            |
+|audit_status|获取审核状态|
+
+## API请求
+API 使用 JSON消息格式，通过 RESTFUL 的HTTP协议进行数据交换。  
+所有请求，使用POST方式，同时在Http header中需要设置Content_Type和鉴权信息，如下例：  
+
+	Content-Type: application/json
+	Authorization: /* auth token here */
+	
+所有请求，参数均以JSON格式设置在 HTTP 请求的Body内，如下例：  
+
+```json
+{
+"data": request_data
+}
+```
+
+
