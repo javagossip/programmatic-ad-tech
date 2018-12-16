@@ -49,10 +49,58 @@ API 使用 JSON消息格式，通过 RESTFUL 的HTTP协议进行数据交换。
 	
 所有请求，参数均以JSON格式设置在 HTTP 请求的Body内，如下例：  
 
-```json
+```
 {
 "data": request_data
 }
 ```
+
+## API响应
+
+HTTP 返回码为200则请求成功，否则可能客户端或服务端产生了异常，可根据 HTTP 状态码判断错误的类型。  
+
+HTTP响应中包含了头部信息：Content-Type: application/json。  
+响应信息包含在返回的JSON 数据中，包含本次操作的返回码和具体错误信息。响应信息分三部分内容，分别为状态码、说明和数据区。  
+
+对非数组形式的API请求，返回数据如下所示：  
+
+|字段名称|类型|说明|
+|-------------|----------|--------|
+|code|int|错误码，非0为错误发生      |
+|message|string|错误信息，若没有错，此字段返回success |
+|data|json array或json object|返回信息|
+
+## 广告主
+
+### 广告主创建
+URL: http://api.xcar.com/adx/v1/advertiser
+
+请求字段：  
+
+|类型   |是否数组类型 |说明|
+|-------|:-----------:|---------|
+|Advertiser |否| 广告主信息|
+
+请求类型Advertiser：
+
+|字段名称|类型|是否必填|      说明|
+|-------|-------|:------:|------|
+|advertiserId|string|是|dsp平台广告主唯一id|
+|name|string|是|广告主名称|
+|businessLicense|string|是|广告主营业执照|
+|qualification|string|否|其他资质文件，多个资质文件需打包成压缩文件|
+|industryType |int   |是|广告主行业类型|
+
+应答字段：  
+
+|字段名称|类型|是否必填|      说明|
+|-------|-------|:------:|------|
+|code|int|是|响应码，0为操作成功，非0操作异常|
+|message|string|否|响应说明，如果code非0返回错误原因|
+|data|object|否|批量操作响应信息|
+
+
+
+
 
 
