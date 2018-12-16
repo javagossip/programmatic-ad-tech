@@ -209,6 +209,45 @@ URL: http://api.xcar.com/adx/v1/creative/audit_status
 }
 ```
 
+### 广告主更新
+
+```
+{
+  "advertiserId":"105",
+  "name":"完美世界"
+}
+```
+
+
+```
+{
+    "code":1,
+    "msg":"广告主名称不能为空"
+}
+```
+
+### 广告主审核状态获取
+```javascript
+[
+  "105",
+  "103",
+  "1110"
+]
+```
+
+```javascript
+{
+"code":0,
+"data":
+[
+    {"103":{"autidStatus":3}},
+    {"105":{"autidStatus":3}}
+],
+"msg":"success"
+}
+```
+
+
 
 
 
