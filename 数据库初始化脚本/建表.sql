@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> db4f7c075073ee0b0af35d9fcfa3a5e50102a82f
 CREATE TABLE `ad_position` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '广告位名称',
@@ -732,7 +735,11 @@ CREATE TABLE `order_put` (
   `limit_state` int(11) DEFAULT NULL COMMENT '限额状态(无用)',
   `reset_faild` int(2) DEFAULT '0' COMMENT '限额重设失败',
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='订单投放表';
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=5000000 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='订单投放表';
+>>>>>>> db4f7c075073ee0b0af35d9fcfa3a5e50102a82f
 
 
 
@@ -761,7 +768,11 @@ CREATE TABLE `orders` (
   `start_time` datetime DEFAULT NULL COMMENT '投放开始日期',
   `end_time` datetime DEFAULT NULL COMMENT '投放结束日期',
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='订单表';
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=5000000 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='订单表';
+>>>>>>> db4f7c075073ee0b0af35d9fcfa3a5e50102a82f
 
 
 
@@ -857,6 +868,10 @@ CREATE TABLE `put` (
   `dx_llly` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '定向 渠道(流量来源)',
   `dx_zdlx` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '定向 终端类型',
   `dx_sb` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '定向设备',
+<<<<<<< HEAD
+=======
+  `dx_media_type` int(11) DEFAULT NULL COMMENT '定向媒体类型',
+>>>>>>> db4f7c075073ee0b0af35d9fcfa3a5e50102a82f
   `dx_media` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '定向 媒体',
   `dx_app` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '定向 app',
   `run_state` int(11) NOT NULL DEFAULT '0' COMMENT '开启状态',
