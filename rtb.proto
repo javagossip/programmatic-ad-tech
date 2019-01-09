@@ -44,12 +44,13 @@ message BidRequest {
         optional string bidfloorcur = 9;
         //是否使用https, 0-不启用安全链接, 1-启用安全链接
         optional uint32 secure = 10; 
+        optional bool is_native_ad = 12;
         map<string, string> ext = 11;    //扩展字段
         
         //protobuf扩展
         extensions 200 to 299;
         
-        //banner广告请求定义
+        //图片广告位请求定义
         message Banner {
             optional uint32 w = 1;       //banner广告位宽
             optional uint32 h = 2;       //banner广告位高
@@ -60,7 +61,7 @@ message BidRequest {
             extensions 200 to 299;
         }
         
-        //视频广告请求定义
+        //视频广告位请求定义
         message Video {
             repeated string mimes = 1;        //支持媒体类型
             optional uint32 minduration = 2;  //视频最小时长
@@ -72,11 +73,7 @@ message BidRequest {
             extensions 200 to 299;
         }
         
-        //原生广告请求定义
         message Native {
-            //原生广告请求
-            required string request = 1; 
-            //协议保留扩展
             extensions 200 to 299;
         }
         
@@ -153,7 +150,7 @@ message BidRequest {
         optional string region = 4;   //地区编码
         optional string city = 5;     //城市编码
         //6位地域码
-        optional string area_code = 6; //6位地域码
+        optional uint32 area_code = 6; //6位地域码
         
         extensions 200 to 299;
     }
@@ -169,7 +166,7 @@ message BidResponse {
     //竞价请求id, 和BidRequest的id保持一致
     required string id = 1;          
     repeated SeatBid seatbid = 2;    //针对单个广告位的竞价响应
-    optional string bidid = 3;       //dsp生成的竞价响应id
+    required string bidid = 3;       //dsp生成的竞价响应id
     
     //协议保留扩展
     extensions 200 to 299;
@@ -181,10 +178,8 @@ message BidResponse {
         message Bid {
             required string id = 1;        //dsp平台参与出价id
             required string impid = 2;     //曝光id, 关联竞价请求中Imp中id
-            optional float price = 3;      //广告出价
-            optional string nurl = 4;      //Win-Notice url
-            optional string adm = 5;       //原生以及视频广告响应对象
-            optional string crid = 6;      //dsp平台创意id
+            required float price = 3;      //广告出价, 单位是分
+            required string crid = 4;      //dsp平台创意id
             optional string dealid = 7;    //请求pmp dealid
             
             repeated string imptrackers = 8; //曝光跟踪地址
