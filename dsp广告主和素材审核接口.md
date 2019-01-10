@@ -89,7 +89,7 @@ URL: http://api.xcar.com/adx/v1/advertiser
 |name|string|是|广告主名称|
 |businessLicense|string|是|广告主营业执照|
 |qualification|string|否|其他资质文件，多个资质文件需打包成压缩文件|
-|industryType |int   |是|广告主行业类型|
+|industryType |int   |是|广告主行业类型，行业类型定义参见：[行业定义](#industry_dic)|
 
 应答字段：  
 
@@ -117,7 +117,7 @@ URL: http://api.xcar.com/adx/v1/advertiser/update
 |name|string|否|广告主名称|
 |businessLicense|string|否|广告主营业执照|
 |qualification|string|否|其他资质文件，多个资质文件需打包成压缩文件|
-|industryType |int   |否|广告主行业类型|
+|industryType |int   |否|广告主行业类型,行业类型定义参见：[行业定义](#industry_dic)|
 
 ### 广告主审核状态获取
 
@@ -186,6 +186,26 @@ URL: http://api.xcar.com/adx/v1/creative/audit_status
 |类型  |是否数组类型 |说明 |
 |-------|:----:|------- |
 |string |是|dsp广告主id  |
+
+# 字典值定义
+## <span id="industry_dic">行业类型</span>  
+
+|行业类型|类型id|
+|:----------:|----|
+|电商 |27|
+|房地产|28|
+|医疗|29|
+|珠宝|30|
+|汽车|31|
+
+
+## <span id="creative_type_dic">广告类型</span>
+
+|广告类型名称|类型id|
+|:----------:|----|
+|视频 |4|
+|贴片|5|
+|信息流|7|
 
 # API请求/响应样例
 ## 广告主请求响应
