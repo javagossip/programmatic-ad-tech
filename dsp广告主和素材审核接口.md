@@ -148,7 +148,7 @@ URL: http://api.xcar.com/adx/v1/creative
 |creativeId|string|是|素材id, dsp平台唯一|
 |advertiserId|string|是|dsp平台广告主id, dsp平台唯一|
 |name|string|是|广告名称|
-|creativeType|int|是|广告类型|
+|creativeType|int|是|广告类型, 广告类型定义参见: [广告类型字典](#creative_type_dic)|
 |creativeUrl|string|否|素材url,非原生广告必填|
 |clickUrl|string|是|                  广告点击url  |
 |landingPage|string|是|               广告落地页地址|
@@ -171,7 +171,7 @@ URL: http://api.xcar.com/adx/v1/creative/update
 |creativeId|string|是|素材id, dsp平台唯一|
 |advertiserId|string|是|dsp平台广告主id, dsp平台唯一|
 |name|string|否|广告名称|
-|creativeType|int|否|广告类型|
+|creativeType|int|否|广告类型, 广告类型定义参见: [广告类型字典](#creative_type_dic)|
 |creativeUrl|string|否|素材url,非原生广告必填|
 |clickUrl|string|否|                  广告点击url  |
 |landingPage|string|否|               广告落地页地址|
