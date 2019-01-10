@@ -15,7 +15,7 @@ Adx RTB 总共包含三个步骤。
 
 ## 接口注意事项
 
-1. ADX 的 RTB API参考通用OpenRTB规范：[http://code.google.com/p/openrtb](http://code.google.com/p/openrtb/)。大体遵循该规范，但对一些字段有调整.
+1. ADX 的 RTB API参考通用OpenRTB规范：[iab techlab openrtb-spec](https://iabtechlab.com/wp-content/uploads/2016/07/OpenRTB-API-Specification-Version-2-5-FINAL.pdf)。大体遵循该规范，但对一些字段有调整.
 
 2. 协议采用 HTTP POST，开启keep-alive，消息格式为ProtoBuf。目前 timeout 设为 200ms。请求头中需要设 Content-Type 为 application/x-protobuf。
 
