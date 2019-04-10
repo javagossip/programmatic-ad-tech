@@ -73,7 +73,7 @@ HTTP响应中包含了头部信息：`Content-Type: application/json`。
 ## 广告主
 
 ### 广告主创建
-URL: http://api.xcar.com/adx/v1/advertiser
+URL: http://{host}/adx/v1/advertiser
 
 请求字段：  
 
@@ -101,7 +101,7 @@ URL: http://api.xcar.com/adx/v1/advertiser
 
 ### 广告主更新
 
-URL: http://api.xcar.com/adx/v1/advertiser/update  
+URL: http://{host}/adx/v1/advertiser/update  
 
 请求字段：  
 
@@ -121,7 +121,7 @@ URL: http://api.xcar.com/adx/v1/advertiser/update
 
 ### 广告主审核状态获取
 
-URL: http://api.xcar.com/adx/v1/advertiser/audit_status  
+URL: http://{host}/adx/v1/advertiser/audit_status  
 
 请求字段：  
 
@@ -133,7 +133,7 @@ URL: http://api.xcar.com/adx/v1/advertiser/audit_status
 
 ### 广告创建
 
-URL: http://api.xcar.com/adx/v1/creative  
+URL: http://{host}/adx/v1/creative  
 
 请求字段：
 
@@ -156,7 +156,7 @@ URL: http://api.xcar.com/adx/v1/creative
 
 ### 广告更新
 
-URL: http://api.xcar.com/adx/v1/creative/update  
+URL: http://{host}/adx/v1/creative/update  
 
 请求字段：
 
@@ -179,7 +179,7 @@ URL: http://api.xcar.com/adx/v1/creative/update
 
 ### 广告审核状态获取
 
-URL: http://api.xcar.com/adx/v1/creative/audit_status
+URL: http://{host}/adx/v1/creative/audit_status
 
 请求字段：  
 
