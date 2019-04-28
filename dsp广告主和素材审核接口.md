@@ -8,7 +8,6 @@
 
    阅读对象为 DSP 的产品和开发人员。该部分详细描述了DSP向ADX上传/修改广告主/广告信息以及查询广告主/广告审核状态的接口。
    
-   
 # 接入步骤
 # Buyer API
 本章节将详细介绍 DSP 如何使用 Buyer API 与 Ad Exchange 进行交互，提交/修改广告主/广告信息，查询广告主/广告审核状态。为确保广告内容的有效性与合法性，所有参与Ad Exchange竞价的 DSP平台必须将广告主和广告信息提前上传到 Ad Exchange 进行审核，审核通过后方可正常投放，如果DSP返回未经审核通过的广告，将直接被过滤不会被展现。
@@ -21,13 +20,13 @@ API 通过用户授权令牌(token)来做权限验证，授权信息需要包含
 
 ## URL定义
 API URL格式定义如下：  
-http://api.xcar.com/adx/${api_version}/${resource_name}/${resource_action}
+http://{host}/adx/{api_version}/${resource_name}/${resource_action}
 
 其中api_version是版本(目前是v1)，resource_name表示要操作的资源，resource_action表示对资源的操作方法。
 
 resource_name目前包括两种资源：  
 
-|操作资源|说明|  
+|操作资源|说明|
 |-----|-----|
 |advertiser|广告主|
 |creative|广告|
@@ -46,7 +45,7 @@ API 使用 JSON消息格式，通过 RESTFUL 的HTTP协议进行数据交换。
 
 	Content-Type: application/json
 	Authorization: /* auth token here */
-	
+
 所有请求，参数均以JSON格式设置在 HTTP 请求的Body内，如下例：  
 
 ```
@@ -150,9 +149,18 @@ URL: http://{host}/adx/v1/creative
 |name|string|是|广告名称|
 |creativeType|int|是|广告类型, 广告类型定义参见: [广告类型字典](#creative_type_dic)|
 |creativeUrl|string|否|素材url,非原生广告必填|
-|clickUrl|string|是|                  广告点击url  |
+|~~clickUrl~~|string|是|                  广告点击url  |
 |landingPage|string|是|               广告落地页地址|
-|nativeAd|object|否|原生广告对象，广告类型为原生广告必填|
+|nativeAd|object|否|原生广告对象，广告类型为原生广告必填, 参见：[NativeAd](#native_ad)|
+
+NativeAd：
+
+| 字段名称 | 类型         | 是否必填 | 说明             |
+| -------- | ------------ | :------: | ---------------- |
+| title    | string       |    是    | 广告名称         |
+| icon     | string       |    是    | 广告icon         |
+| desc     | string       |    否    | 广告描述         |
+| images   | string array |    是    | 原生广告图片素材 |
 
 ### 广告更新
 
@@ -173,7 +181,7 @@ URL: http://{host}/adx/v1/creative/update
 |name|string|否|广告名称|
 |creativeType|int|否|广告类型, 广告类型定义参见: [广告类型字典](#creative_type_dic)|
 |creativeUrl|string|否|素材url,非原生广告必填|
-|clickUrl|string|否|                  广告点击url  |
+|~~clickUrl~~|string|否|                  广告点击url  |
 |landingPage|string|否|               广告落地页地址|
 |nativeAd|object|否|原生广告对象，广告类型为原生广告必填|
 
@@ -192,22 +200,27 @@ URL: http://{host}/adx/v1/creative/audit_status
 
 |行业类型|类型id|
 |:----------:|----|
-|电商 |27|
-|房地产|28|
-|医疗|29|
-|珠宝|30|
-|汽车|31|
+|不限|1|
 
 
 ## <span id="creative_type_dic">广告类型</span>
 
 |广告类型名称|类型id|
 |:----------:|----|
-|视频 |4|
-|贴片|5|
-|信息流|7|
+|图片(Banner) |2|
+|贴片(Video)|5|
+|信息流(Native)|7|
+
+## <span id="audit_status_dic">审核状态</span>
+
+| 审核状态 | 说明     |
+| :------: | -------- |
+|    1     | 审核通过 |
+|    2     | 审核拒绝 |
+|    3     | 待审核   |
 
 # API请求/响应样例
+
 ## 广告主请求响应
 ### 广告主创建
 
@@ -260,7 +273,7 @@ URL: http://{host}/adx/v1/creative/audit_status
 "code":0,
 "data":
 [
-    {"103":{"autidStatus":3}},
+    {"103":{"autidStatus":3}}, 
     {"105":{"autidStatus":3}}
 ],
 "msg":"success"
