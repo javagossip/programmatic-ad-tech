@@ -44,7 +44,7 @@ API 使用 JSON消息格式，通过 RESTFUL 的HTTP协议进行数据交换。
 所有请求，使用POST方式，同时在Http header中需要设置Content_Type和鉴权信息，如下例：  
 
 	Content-Type: application/json
-	Authorization: /* auth token here */
+	Authentication: /* auth token here */
 
 所有请求，参数均以JSON格式设置在 HTTP 请求的Body内，如下例：  
 
