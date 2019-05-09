@@ -1,20 +1,20 @@
-//Copyright 2018 xcar.com.cn All right reserved.
+//Copyright 2019 iwanvi.com All right reserved.
 syntax = "proto2";
 
 option java_outer_classname = "NvwaRtb";
-option java_package = "com.xcar.nvwa.rtb.proto";
+option java_package = "com.iwanvi.nvwa.rtb.proto";
 
-package com.xcar.rtb.proto;
+package com.iwanvi.nvwa.rtb.proto;
 
 //竞价请求对象
 message BidRequest {
     required string id = 1; //竞价请求id, 由adx自动生成
     
-    repeated Imp imp   = 2;
+    repeated Imp imp = 2;
     //站点对象, 网站流量使用
     optional Site site = 3; 
     //移动应用，移动app流量使用
-    optional App app   = 4;
+    optional App app = 4;
     //设备对象
     optional Device device = 5;
     //用户对象
@@ -24,19 +24,20 @@ message BidRequest {
     //竞价方式：1-一价；2-二价
     optional uint32 at = 8;
     //扩展字段
-    map<string, string> ext = 9;
-    
+    //map<string, string> ext = 9;
+     
     //保留扩展，扩展协议字段编号
     extensions 200 to 299;
     
     message Imp {
         required string id = 1; 
+        optional Banner banner = 2;
+        optional Video video = 3;
         
-        oneof ad {
-            Banner banner = 2; //Banner广告(图片广告)
-            Video video = 3;   //视频广告
-            Native native = 5; //原生广告
-        }
+        //oneof ad {
+        //    Banner banner = 2; //Banner广告(图片广告)
+        //    Video video = 3;   //视频广告
+        //}
         
         optional Pmp pmp = 6;            //私有竞价相关定义      
         optional string tagid = 7;       //媒体广告位id，由Ad-Exchange定义
@@ -44,8 +45,9 @@ message BidRequest {
         optional string bidfloorcur = 9;
         //是否使用https, 0-不启用安全链接, 1-启用安全链接
         optional uint32 secure = 10; 
-        optional bool is_native_ad = 12;
-        map<string, string> ext = 11;    //扩展字段
+        optional bool is_native_ad = 12; //是否原生广告，原生广告dsp平台可以根据tagid来进行匹配
+        //map<string, string> ext = 11;    //扩展字段
+        optional NativeAd nativeAd = 13; //原生广告请求
         
         //protobuf扩展
         extensions 200 to 299;
@@ -73,10 +75,11 @@ message BidRequest {
             extensions 200 to 299;
         }
         
-        message Native {
-            extensions 200 to 299;
+        message NativeAd {
+        	//原生广告位规格id, 同一个原生广告广告位同时可能支持多种广告样式
+            repeated string template_id = 1; 
         }
-        
+         
         //私有竞价定义
         message Pmp {
             repeated Deal deals = 1;
@@ -127,13 +130,14 @@ message BidRequest {
         optional Geo geo = 2;            //地理位置对象
         optional string ip = 3;          //设备ip
         optional string ipv6 = 4;        //ipv6地址
-        optional uint32 devicetype = 5;  //设备类型, 参考设备类型定义
+        optional uint32 devicetype = 5;  //设备类型, 1-phone,2-pad,3-pc,4-tv
         optional string make = 6;        //设备制造商
         optional string model = 7;       //设备型号, 如：iPhone
         optional string os = 8;          //操作系统，如：ios/Android
         optional string osv = 9;         //操作系统版本
-        optional string carrier = 10;          //运营商
-        optional uint32 connectiontype = 11;   //网络连接类型
+        optional string carrier = 10;    //运营商, 0-未知,1-移动,2-联通,3-电信
+        
+        optional uint32 connectiontype = 11;   //网络连接类型, 1-wifi; 2-2G;3-3G;4-4G;5-5G; 0-未知
         optional string ifa = 12;      //明文设备码，如安卓的imei或ios的idfa
         optional string didmd5 = 13;   //md5设备码
         optional string mac = 14;      //mac地址明文
@@ -171,6 +175,16 @@ message BidResponse {
     //协议保留扩展
     extensions 200 to 299;
     
+    message NativeAdResponse {
+        optional string icon = 1;
+        optional string title = 2;
+        optional string desc = 3;
+        repeated string imgs = 4;
+        optional string ctatext = 5;
+        //原生广告模板id
+        optional string template_id = 6;
+    }
+    
     message SeatBid {
         repeated Bid bid = 1;        //同一个广告位的多个出价
         optional string seat = 2;    //广告位名称
@@ -180,11 +194,18 @@ message BidResponse {
             required string impid = 2;     //曝光id, 关联竞价请求中Imp中id
             required float price = 3;      //广告出价, 单位是分
             required string crid = 4;      //dsp平台创意id
-            optional string dealid = 7;    //请求pmp dealid
+            optional string dealid = 5;    //请求pmp dealid
             
-            repeated string imptrackers = 8; //曝光跟踪地址
-            repeated string clktrackers = 9; //点击跟踪地址
+            repeated string imptrackers = 6; //曝光跟踪地址
+            repeated string clktrackers = 7; //点击跟踪地址
             
+            optional string ldp = 8; //广告落地页
+            optional string creative_url= 9; //广告创意地址
+            optional uint32 click_type = 10; //点击类型：1-浏览器打开  2-应用下载
+            
+            optional string bundle = 11; //安卓应用包名或者ios的appid
+            optional string adm = 12; //动态广告代码
+            optional NativeAdResponse nativeAd = 13; //原生广告响应
             //协议保留扩展
             extensions 200 to 299;
         } 
