@@ -201,11 +201,16 @@ message BidResponse {
             
             optional string ldp = 8; //广告落地页
             optional string creative_url= 9; //广告创意地址
-            optional uint32 click_type = 10; //点击类型：1-浏览器打开  2-应用下载
+            optional uint32 click_type = 10; //点击类型：1-浏览器打开  2-安卓应用下载  3-deeplink，4-ios应用
             
-            optional string bundle = 11; //安卓应用包名或者ios的appid
-            optional string adm = 12; //动态广告代码
+            //安卓应用包名或者ios的appid， 点击类型为安卓应用下载和ios应用时候，bundle必填
+            optional string bundle = 11; 
+            optional string adm = 12;    //动态广告代码
             optional NativeAdResponse nativeAd = 13; //原生广告响应
+            optional string app_download_url = 14; //应用下载地址
+            optional string app_name = 15; //应用名称
+            optional string deeplink = 16; //deeplink链接
+            
             //协议保留扩展
             extensions 200 to 299;
         } 
