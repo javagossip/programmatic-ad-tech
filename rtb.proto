@@ -96,6 +96,7 @@ message BidRequest {
     
     message App {
         optional string id = 1;        //appid, 由Ad-Exchange定义
+        optional string name = 8;
         optional string bundle = 2;    //应用包名，对安卓是应用包名，如：com.iqiyi，ios为appstore id
         repeated string cat = 3;           //App分类列表
         optional string ver = 4;           //App版本
@@ -142,6 +143,9 @@ message BidRequest {
         optional string didmd5 = 13;   //md5设备码
         optional string mac = 14;      //mac地址明文
         optional string macmd5 = 15;   //md5 mac地址
+        optional string adid = 16; //安卓id
+        optional uint32 h = 17; //设备屏幕高
+        optional uint32 w = 18; //设备屏幕宽
         
         //协议保留扩展
         extensions 200 to 299;
