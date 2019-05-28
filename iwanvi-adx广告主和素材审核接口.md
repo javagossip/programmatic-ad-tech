@@ -277,8 +277,8 @@ URL: http://{host}/adx/v1/creative/audit_status
 "code":0,
 "data":
 [
-    {"103":{"autidStatus":3}}, 
-    {"105":{"autidStatus":3}}
+    {"103":{"autidStatus":3,"auditMsg":"审核备注/拒绝原因"}}, 
+    {"105":{"autidStatus":3, "auditMsg":"xxxxxx"}}
 ],
 "msg":"success"
 }
