@@ -138,7 +138,7 @@ message BidRequest {
         optional string osv = 9;         //操作系统版本
         optional string carrier = 10;    //运营商, 0-未知,1-移动,2-联通,3-电信
         
-        optional uint32 connectiontype = 11;   //网络连接类型, 1-wifi; 2-2G;3-3G;4-4G;5-5G; 0-未知
+        optional uint32 connectiontype = 11; //网络连接类型, 1-wifi; 2-2G;3-3G;4-4G;5-5G; 0-未知
         optional string ifa = 12;      //明文设备码，如安卓的imei或ios的idfa
         optional string didmd5 = 13;   //md5设备码
         optional string mac = 14;      //mac地址明文
@@ -200,8 +200,11 @@ message BidResponse {
             required string crid = 4;      //dsp平台创意id
             optional string dealid = 5;    //请求pmp dealid
             
-            repeated string imptrackers = 6; //曝光跟踪地址
-            repeated string clktrackers = 7; //点击跟踪地址
+            repeated string imptrackers = 6; //曝光监测
+            repeated string clktrackers = 7; //点击监测
+            repeated string dltrackers = 17; //下载监测
+            repeated string dpstrackers = 18; //deeplink成功监测
+            repeated string dpftrackers = 19; //deeplink失败监测
             
             optional string ldp = 8; //广告落地页
             optional string creative_url= 9; //广告创意地址
